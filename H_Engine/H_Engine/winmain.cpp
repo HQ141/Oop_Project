@@ -38,7 +38,19 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
                 game->run(hwnd);
         }
         SAFE_DELETE (game);
-        return msg.wParam;
+        return int(msg.wParam);
+    }
+    catch (const GameError& e)
+    {
+        game->deleteAll();
+        DestroyWindow(hwnd);
+        MessageBox(NULL, e.w_what(), L"Game Error", MB_OK);
+    }
+    catch (const std::exception& e)
+    {
+        game->deleteAll();
+        DestroyWindow(hwnd);
+        MessageBox(NULL, L"Unknown error occured in game.", L"Standard Exception", MB_OK);
     }
     catch(...)
     {

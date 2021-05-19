@@ -1,36 +1,37 @@
 #ifndef NINJA_H
 #define NINJA_H
 #include"game.h"
-#include"image.h"
-#include"textureManager.h"
+
+#include "Vec2.h"
+#include "_Rect.h"
+#include "Ninja.h"
+#include "Ship.h"
+#include "Bullet.h"
+#include "Kunai.h"
+#include "Timer.h"
+#include "ProjectileManager.h"
+
+#include <vector>
+
 class Deninja :public Game
 {
 private:
-	TextureManager Bgmanager;
-	Image Bg;
-    TextureManager Bulletmanager;
-    Image *bullet;
-    TextureManager ship1Texture;
-    TextureManager ship2Texture;
-    TextureManager ship3Texture;
-    TextureManager ship4Texture;
-    TextureManager ship5Texture;
-    Image ship[5];
-    bool bul = false;
-    float shipx;
-    float shipy;
-    int one;
-    TextureManager runmanager[11];
-    Image runi[11];
-    int runt;
-    int forward=0;
-    bool direction = false;
-    int backward=0;
-    float ninx = 0; 
-    int jump=0;
-    bool shipdir = false;
-    float niny=800;
+    // the timers for the entire game
+    Timer timer;
+    
+    //
+    Ninja* ninja = NULL;
+    Ship* ship = NULL;
+    ProjectileManager bullets;
+    ProjectileManager kunai;
+
+    // isn't really animated, but there's room for it to be
+    // could also make a new class to handle 'scenes' with several animations
+    // has to be a pointer because a graphics pointer is needed to construct it
+    Animation* background = NULL;
+
     int score = 0;
+    bool gameOver = false;
 public:
     Deninja();
     virtual ~Deninja();

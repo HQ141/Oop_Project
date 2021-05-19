@@ -1,4 +1,7 @@
 #include "textureManager.h"
+
+#include <assert.h>
+
 TextureManager::TextureManager()
 {
     texture = NULL;
@@ -8,11 +11,24 @@ TextureManager::TextureManager()
     graphics = NULL;
     initialized = false;
 }
+TextureManager::TextureManager(const TextureManager& other)
+    :
+    TextureManager()
+{
+    if (other.initialized) {
+        initialize(other.graphics, other.file);
+    }
+}
 TextureManager::~TextureManager(){
-    SAFE_RELEASE(texture);
+    if(texture != NULL)
+        SAFE_RELEASE(texture);
 }
 bool TextureManager::initialize(Graphics *g, LPCWSTR f)
 {
+    // make sure pointers passed were valid
+    assert(g != NULL);
+    assert(f != NULL);
+
     try{
         graphics = g;
         file = f;
@@ -21,6 +37,7 @@ bool TextureManager::initialize(Graphics *g, LPCWSTR f)
         if (FAILED(hr))
         {
             SAFE_RELEASE(texture);
+            throw std::exception("Error in loading texture");
             return false;
         }
     }

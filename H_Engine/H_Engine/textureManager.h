@@ -17,6 +17,7 @@ class TextureManager{
 
   public:
     TextureManager();
+    TextureManager(const TextureManager& other);
     virtual ~TextureManager();
     LP_TEXTURE getTexture() const {return texture;}
     UINT getWidth() const {return width;}

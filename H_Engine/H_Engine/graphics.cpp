@@ -1,4 +1,8 @@
 #include "graphics.h"
+
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dx9.lib")
+
 Graphics::Graphics(){
     direct3d = NULL;
     device3d = NULL;
@@ -23,7 +27,7 @@ void Graphics::initialize(HWND hw, int w, int h, bool full){
     height = h;
     direct3d = Direct3DCreate9(D3D_SDK_VERSION);
     if (direct3d == NULL)
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Direct3D"));
+        throw GameError(gameErrorNS::FATAL_ERROR, L"Error initializing Direct3D");
 
     initD3Dpp();
     if(fullscreen)
@@ -31,8 +35,8 @@ void Graphics::initialize(HWND hw, int w, int h, bool full){
         if(isAdapterCompatible())
             d3dpp.FullScreen_RefreshRateInHz = pMode.RefreshRate;
         else
-            throw(GameError(gameErrorNS::FATAL_ERROR, 
-            "The graphics device does not support the specified resolution and/or format."));
+            throw GameError(gameErrorNS::FATAL_ERROR, 
+            L"The graphics device does not support the specified resolution and/or format.");
     }
 
     D3DCAPS9 caps;
@@ -52,11 +56,11 @@ void Graphics::initialize(HWND hw, int w, int h, bool full){
         &device3d);
 
     if (FAILED(result))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error creating Direct3D device"));
+        throw GameError(gameErrorNS::FATAL_ERROR, L"Error creating Direct3D device");
  
     result = D3DXCreateSprite(device3d, &sprite);
     if (FAILED(result))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error creating Direct3D sprite"));
+        throw GameError(gameErrorNS::FATAL_ERROR, L"Error creating Direct3D sprite");
 
 }void Graphics::initD3Dpp(){
     try{
@@ -74,8 +78,8 @@ void Graphics::initialize(HWND hw, int w, int h, bool full){
         d3dpp.PresentationInterval   = D3DPRESENT_INTERVAL_IMMEDIATE;
     } catch(...)
     {
-        throw(GameError(gameErrorNS::FATAL_ERROR, 
-                "Error initializing D3D presentation parameters"));
+        throw GameError(gameErrorNS::FATAL_ERROR, 
+                L"Error initializing D3D presentation parameters");
     }
 }
 HRESULT Graphics::loadTexture(LPCWSTR filename, COLOR_ARGB transcolor,UINT &width, UINT &height, LP_TEXTURE &texture){
@@ -95,7 +99,7 @@ HRESULT Graphics::loadTexture(LPCWSTR filename, COLOR_ARGB transcolor,UINT &widt
         height = info.Height;
         result = D3DXCreateTextureFromFileEx(device3d, filename,info.Width, info.Height,1, 0, D3DFMT_UNKNOWN,D3DPOOL_DEFAULT,D3DX_DEFAULT,D3DX_DEFAULT,transcolor,&info,NULL,&texture );
     } catch(...){
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error in Graphics::loadTexture"));
+        throw GameError(gameErrorNS::FATAL_ERROR, L"Error in Graphics::loadTexture");
     }
     return result;
 }

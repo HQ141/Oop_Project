@@ -30,9 +30,9 @@ class Image{
     virtual bool  getVisible()  {return visible;}
     virtual float getX()        {return spriteData.x;}
     virtual float getY()        {return spriteData.y;}
-    virtual float getScale()    {return spriteData.scale;}
-    virtual int   getWidth()    {return spriteData.width;}
-    virtual int   getHeight()   {return spriteData.height;}
+    virtual float getScale() const {return spriteData.scale;}
+    virtual int   getWidth() const {return spriteData.width;}
+    virtual int   getHeight() const {return spriteData.height;}
     virtual float getCenterX()      {return spriteData.x + spriteData.width/2*getScale();}
     virtual float getCenterY()      {return spriteData.y + spriteData.height/2*getScale();}
     virtual float getDegrees()      {return spriteData.angle*(180.0f/(float)PI);}

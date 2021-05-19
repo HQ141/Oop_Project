@@ -63,7 +63,7 @@ void Game::initialize(HWND hw){
     graphics->initialize(hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
     input->initialize(hwnd, false);
     if(QueryPerformanceFrequency(&timerFreq) == false)
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
+        throw GameError(gameErrorNS::FATAL_ERROR, L"Error initializing high resolution timer");
 
     QueryPerformanceCounter(&timeStart);
     initialized = true;
