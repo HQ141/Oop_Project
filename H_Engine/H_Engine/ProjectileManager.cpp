@@ -28,8 +28,10 @@ int ProjectileManager::ProcessWallCollisions(const _Rect& walls)
 {
     int count = 0;
 	for (Projectile* p : projectiles) {
-        if (p->ProcessWallCollision(walls)) {
-            count++;
+        if (!p->IsDestroyed()) {
+            if (p->ProcessWallCollision(walls)) {
+                count++;
+            }
         }
 	}
     return count;
@@ -38,7 +40,7 @@ int ProjectileManager::ProcessWallCollisions(const _Rect& walls)
 void ProjectileManager::RemoveDestroyed()
 {
     // remove any projectiles that were destroyed from collisions or any other means
-    const std::vector<Projectile*>::const_iterator newEnd = std::remove_if(
+    const auto newEnd = std::remove_if(
         // begin and end points
         projectiles.begin(), projectiles.end(),
         // lambda function to remove destroyed projectiles

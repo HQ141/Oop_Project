@@ -13,11 +13,44 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Ninjarun">
-      <UniqueIdentifier>{e687b215-e522-4815-86a4-b3f700647c1a}</UniqueIdentifier>
+    <Filter Include="Resource Files\FlyingSaucer">
+      <UniqueIdentifier>{e04cb498-6779-426c-826a-5a995ce3a812}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\ninja jump">
-      <UniqueIdentifier>{9b43fd29-0f20-458e-a067-0a8918b1af3f}</UniqueIdentifier>
+    <Filter Include="Resource Files\Ninja">
+      <UniqueIdentifier>{b84e3752-fa49-47bb-9ecd-daccc7be9c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Run">
+      <UniqueIdentifier>{7c92ad10-a175-43e2-a00d-9a0382417bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Throw">
+      <UniqueIdentifier>{e87b7e3d-d13e-46ee-a195-4087d61970f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Dead">
+      <UniqueIdentifier>{4bdb6545-8328-4761-89ec-f344c1b98c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Attack">
+      <UniqueIdentifier>{e4c7850a-8766-4c56-8633-4b002c82a3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Idle">
+      <UniqueIdentifier>{530940d4-ebb8-4089-a9b5-f523c9ccaab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Jump">
+      <UniqueIdentifier>{df9b8006-5597-45b4-8f63-958be73533b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Slide">
+      <UniqueIdentifier>{56b5a12a-4743-4cde-81a4-f0f255c8056a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Climb">
+      <UniqueIdentifier>{8412a791-0ef8-41d3-a7af-a1721eece1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\Glide">
+      <UniqueIdentifier>{1780e01b-c939-4f4a-aabd-03b898f619cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\JumpThrow">
+      <UniqueIdentifier>{609534bb-65d9-4383-8ed4-8efdc3f1554c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Ninja\JumpAttack">
+      <UniqueIdentifier>{ad40bd4c-640d-4c59-b681-14555fbce6a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +117,9 @@
     <ClInclude Include="ProjectileManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WideString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -142,131 +178,359 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="flying-saucer-1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-4.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-5.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-6.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-7.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-8.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-9.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-10.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-11.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-12.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-13.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-14.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-15.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-16.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-17.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-18.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="flying-saucer-19.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="bullet.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="png\BG.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__000.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\flying-saucer-1.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__001.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\flying-saucer-2.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__002.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\flying-saucer-4.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__003.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\flying-saucer-5.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__004.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\flying-saucer-3.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__005.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\FlyingSaucer\bullet.png">
+      <Filter>Resource Files\FlyingSaucer</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__006.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\Ninja\Kunai.png">
+      <Filter>Resource Files\Ninja</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__007.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\Ninja\Run__009.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__008.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\Ninja\Run__000.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="png\Ninjarun\Run__009.png">
-      <Filter>Resource Files\Ninjarun</Filter>
+    <Image Include="png\Ninja\Run__001.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Idle__000.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="png\Ninja\Run__002.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__000.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__003.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__001.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__004.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__002.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__005.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__003.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__006.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__004.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__007.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__005.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Run__008.png">
+      <Filter>Resource Files\Ninja\Run</Filter>
     </Image>
-    <Image Include="Jump__006.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Throw__000.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
     </Image>
-    <Image Include="Jump__007.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Throw__001.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
     </Image>
-    <Image Include="Jump__008.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Throw__002.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
     </Image>
-    <Image Include="Jump__009.png">
-      <Filter>Resource Files\ninja jump</Filter>
+    <Image Include="png\Ninja\Throw__003.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__004.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__005.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__006.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__007.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__008.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Throw__009.png">
+      <Filter>Resource Files\Ninja\Throw</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__000.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__001.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__002.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__003.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__004.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__005.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__006.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__007.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__008.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Dead__009.png">
+      <Filter>Resource Files\Ninja\Dead</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__000.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__001.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__002.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__003.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__004.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__005.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__006.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__007.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__008.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Attack__009.png">
+      <Filter>Resource Files\Ninja\Attack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__000.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__001.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__002.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__003.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__004.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__005.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__006.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__007.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__008.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Idle__009.png">
+      <Filter>Resource Files\Ninja\Idle</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__000.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__001.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__002.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__003.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__004.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__005.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__006.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__007.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__008.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump__009.png">
+      <Filter>Resource Files\Ninja\Jump</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__000.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__001.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__002.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__003.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__004.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__005.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__006.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__007.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__008.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Slide__009.png">
+      <Filter>Resource Files\Ninja\Slide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_000.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_001.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_002.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_003.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_004.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_005.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_006.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_007.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_008.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Climb_009.png">
+      <Filter>Resource Files\Ninja\Climb</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_000.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_001.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_002.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_003.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_004.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_005.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_006.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_007.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_008.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Glide_009.png">
+      <Filter>Resource Files\Ninja\Glide</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__009.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__000.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__001.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__002.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__003.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__004.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__005.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__006.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__007.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Throw__008.png">
+      <Filter>Resource Files\Ninja\JumpThrow</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__000.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__001.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__002.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__003.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__004.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__005.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__006.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__007.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__008.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
+    </Image>
+    <Image Include="png\Ninja\Jump_Attack__009.png">
+      <Filter>Resource Files\Ninja\JumpAttack</Filter>
     </Image>
   </ItemGroup>
 </Project>

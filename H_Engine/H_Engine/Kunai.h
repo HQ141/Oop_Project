@@ -26,8 +26,7 @@ private:
 	// drawing related
 	// animation files
 	static const std::vector<LPCWSTR> file;
-	float imageScale = 1.0f;
-	float degrees = 270.0f;
+	float imageScale = 0.3f;
 	Animation animation;
 };
 

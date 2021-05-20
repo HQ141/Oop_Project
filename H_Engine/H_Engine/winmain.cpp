@@ -44,13 +44,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine
     {
         game->deleteAll();
         DestroyWindow(hwnd);
-        MessageBox(NULL, e.w_what(), L"Game Error", MB_OK);
+        MessageBox(NULL, WideString(e.what()).cw_str(), WideString(e.GetType()).cw_str(), MB_OK);
     }
     catch (const std::exception& e)
     {
         game->deleteAll();
         DestroyWindow(hwnd);
-        MessageBox(NULL, L"Unknown error occured in game.", L"Standard Exception", MB_OK);
+        MessageBox(NULL, WideString(e.what()).cw_str(), L"Standard Exception", MB_OK);
     }
     catch(...)
     {

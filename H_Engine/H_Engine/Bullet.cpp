@@ -2,7 +2,7 @@
 #include <assert.h>
 
 const std::vector<LPCWSTR> Bullet::file = {
-	L"bullet.png"
+	L"png\\FlyingSaucer\\bullet.png"
 };
 
 Bullet::Bullet(const Vec2& position, const Vec2& velocity, Graphics* graphics)

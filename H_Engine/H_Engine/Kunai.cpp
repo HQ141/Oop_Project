@@ -3,7 +3,7 @@
 
 // using the bullet image for now, until I can find something else
 const std::vector<LPCWSTR> Kunai::file = {
-	L"Bullet.png"
+	L"png\\Ninja\\Kunai.png"
 };
 
 // copied over from bullet
@@ -12,7 +12,7 @@ const std::vector<LPCWSTR> Kunai::file = {
 Kunai::Kunai(const Vec2& position, const Vec2& velocity, Graphics* graphics)
 	:
 	Projectile(position, velocity),
-	animation(graphics, file, imageScale, degrees)
+	animation(graphics, file, imageScale)
 {
 	// flipped because the image is horizontal but the bullet falls vertically
 	SetWidth(animation.GetHeight());
@@ -51,5 +51,33 @@ void Kunai::OnLostDevice()
 void Kunai::Draw()
 {
 	assert(!IsDestroyed());
-	animation.Draw(GetPosition());
+	const Vec2 v = GetVelocity();
+	float radians = (float) atan(v.y / v.x);
+	const float angleOffset = PI / 2;
+	
+	if (v.x > 0) {
+		// right two quadrants
+		if (radians >= 0) {
+			// Q1
+			animation.Draw(GetPosition(), angleOffset + radians);
+		}
+		else {
+			// Q4
+			animation.Draw(GetPosition(), angleOffset + 2 * PI - abs(radians));
+		}
+	}
+	else if (v.x < 0) {
+		// left two quadrants
+		if (radians >= 0) {
+			// Q3
+			animation.Draw(GetPosition(), angleOffset + PI + radians);
+		}
+		else {
+			// Q2
+			animation.Draw(GetPosition(), angleOffset + PI - abs(radians));
+		}
+	}
+	else {
+		// vertically up or down
+	}
 }

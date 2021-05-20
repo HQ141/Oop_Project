@@ -2,8 +2,9 @@
 #define GAMEERROR_H
 #define WIN32_LEAN_AND_MEAN
 
-#include <string>
 #include <exception>
+#include "WideString.h"
+#include <sstream>
 
 namespace gameErrorNS{
     
@@ -11,29 +12,84 @@ namespace gameErrorNS{
     const int WARNING = 1;
 }
 
+// this is based almost entirely on the ChiliException class 
+// made by a youtuber with the name 'planetchili'
 
-class GameError : public std::exception{
-private:
-    int     errorCode;
-    std::string message;
-    LPCWSTR w_message;
+class GameError : public std::exception {
 public:
-    
-    GameError() throw() :errorCode(gameErrorNS::FATAL_ERROR), message("Undefined Error in game.") {}
-    GameError(const GameError& e) throw(): std::exception(e), errorCode(e.errorCode), message(e.message) {}
-    GameError(int code, const std::string &s) throw() :errorCode(code), message(s) {}
-    GameError(int code, const LPCWSTR s) throw() : errorCode(code), w_message(s) {}
-    GameError& operator= (const GameError& rhs) throw() {
-        std::exception::operator=(rhs);
-        this->errorCode = rhs.errorCode;
-        this->message = rhs.message;
+    GameError(int code, const char* desc, const char* filename, int line) noexcept 
+        :
+        code(code),
+        line(line),
+        desc(desc),
+        filename(filename)
+    {
     }
-    virtual ~GameError() noexcept {};
-    virtual const char* what() const throw() { return this->getMessage(); }
-    virtual LPCWSTR w_what() const throw() { return this->w_getMessage(); }
-    const char* getMessage() const throw() { return message.c_str(); }
-    const LPCWSTR w_getMessage() const throw() { return w_message; }
-    int getErrorCode() const throw() { return errorCode; }
+    GameError(int code, std::string desc, const char* filename, int line) noexcept
+        :
+        code(code),
+        line(line),
+        desc(desc),
+        filename(filename)
+    {
+    }
+    GameError(int code, const char* filename, int line) noexcept
+        :
+        code(code),
+        line(line),
+        desc(""),
+        filename(filename)
+    {
+    }
+    virtual ~GameError() noexcept 
+    {
+    }
+
+    virtual const wchar_t* w_what() const noexcept
+    {
+        return WideString(what()).cw_str();
+    }
+
+    virtual const char* what() const noexcept override
+    {
+        std::ostringstream oss;
+        oss << "[Code] " << code << std::endl
+            << "[Type] " << GetType() << std::endl
+            << GetOriginString();
+        if (desc.size() > 0) {
+            oss << std::endl
+                << "[Description] " << GetErrorString();
+        }
+        whatBuffer = oss.str();
+        return whatBuffer.c_str();
+    }
+
+    virtual std::string GetType() const
+    {
+        return "Game Error";
+    }
+
+    std::string GetOriginString() const {
+        std::ostringstream oss;
+        oss << "[File] " << filename << std::endl
+            << "[Line] " << line;
+        return oss.str();
+    }
+
+    virtual std::string GetErrorString() const {
+        return desc;
+    }
+
+private:
+    int code;
+    int line;
+    std::string filename;
+    std::string desc;
+protected:
+    mutable std::string whatBuffer;
 };
+
+#define ERROR_DESC(code, desc) GameError(code, desc, __FILE__, __LINE__)
+#define ERROR_NO_DESC(code) GameError(code, __FILE__, __LINE__)
 
 #endif

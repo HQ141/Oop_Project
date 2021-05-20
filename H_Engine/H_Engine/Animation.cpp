@@ -1,8 +1,9 @@
 #include "Animation.h"
 #include <fstream>
-Animation::Animation(Graphics* graphics, const std::vector<LPCWSTR>& files, float scaling, float angle, float frameHoldDuration)
+Animation::Animation(Graphics* graphics, const std::vector<LPCWSTR>& files, float scaling, float angle, float frameHoldDuration, bool isCyclic)
 	:
-	frameHoldDuration(frameHoldDuration)
+	frameHoldDuration(frameHoldDuration),
+	isCyclic(isCyclic)
 {
 	for (const wchar_t* f : files) {
 		frames.push_back(Frame(graphics, f, scaling, angle));
@@ -16,7 +17,13 @@ void Animation::Advance(float deltatime)
 		frameHeldFor -= frameHoldDuration;
 		currentFrame++;
 		if (currentFrame >= frames.size()) {
-			currentFrame = 0;
+			if (isCyclic) {
+				currentFrame = 0;
+			}
+			else {
+				// reset to the revious, aka last frame
+				currentFrame--;
+			}
 		}
 	}
 }
@@ -24,6 +31,11 @@ void Animation::Advance(float deltatime)
 void Animation::Draw(const Vec2& position, Direction direction)
 {
 	frames[currentFrame].Draw(position, direction);
+}
+
+void Animation::Draw(const Vec2& position, float radians)
+{
+	frames[currentFrame].Draw(position, radians);
 }
 
 void Animation::Draw(float x, float y, Direction direction)

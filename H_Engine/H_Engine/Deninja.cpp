@@ -17,15 +17,13 @@ void Deninja::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd);
 
-    ship = new Ship(100.0f, 100.0f, graphics);
+    ship = new Ship({ 100.0f, 100.0f }, {1000.0f, 0.0f}, graphics);
     ninja = new Ninja(0.0f, 800.0f, graphics);
     // just making a vector on the go
-    background = new Animation(graphics, std::vector<LPCWSTR>({L"BG.png"}), 1.0f);
-
-    ship->SetVelocity(Vec2(400.0f, 0.0f));
+    background = new Animation(graphics, std::vector<LPCWSTR>({L"png\\BG.png"}), 1.0f);
 }
 
-void Deninja::update() 
+void Deninja::update()
 {
     if (gameOver) {
         // display some message
@@ -40,7 +38,7 @@ void Deninja::update()
     ship->Update(deltatime);
 
     // see if ship can fire a new bullet and do so if it can
-    if (ship->CanFire()) {
+    if (ship->CanFire() && !ship->IsDestroyed()) {
         bullets.Add(ship->Fire());
     }
 
@@ -56,29 +54,34 @@ void Deninja::update()
     // this guy is superhuman, so... 10 ms-1
     const float jumpSpeed = 458.0f;
     // see projectile.h for details
-
-    if (input->isKeyDown('D')) {
-        vel.x += movementSpeed;
-    }
-    else if (input->isKeyDown('A')) {
-        vel.x -= movementSpeed;
-    }
-
-    if (input->isKeyDown('W')) {
-        if (!ninja->IsInAir()) {
-            ninja->Jump(jumpSpeed);
+    if (!ninja->IsDead()) {
+        if (input->isKeyDown('D')) {
+            vel.x += movementSpeed;
         }
-    }
+        else if (input->isKeyDown('A')) {
+            vel.x -= movementSpeed;
+        }
 
-    if (!ninja->IsInAir()) {
-        ninja->SetVelocity(vel);
-    }
+        if (input->isKeyDown('W')) {
+            if (!ninja->IsJumping()) {
+                ninja->Jump(jumpSpeed);
+            }
+        }
 
-    if (input->getMouseLButton()) {
-        if (ninja->CanFire()) {
-            const float targetX = (float) input->getMouseX();
-            const float targetY = (float) input->getMouseY();
-            kunai.Add(ninja->Fire(Vec2{targetX, targetY}));
+        if (input->getMouseLButton()) {
+            if (ninja->CanThrow()) {
+                const float targetX = (float)input->getMouseX();
+                const float targetY = (float)input->getMouseY();
+                if (ninja->IsRunning()) {
+                    // stop running to throw
+                    ninja->SetVelocity({});
+                }
+                kunai.Add(ninja->Throw(Vec2{ targetX, targetY }));
+            }
+        }
+
+        if (ninja->CanChangeState() && !ninja->IsJumping()) {
+            ninja->SetVelocity(vel);
         }
     }
 
@@ -92,49 +95,65 @@ void Deninja::ai()
 void Deninja::collisions()
 {
     const _Rect walls(Vec2(0, 0), GAME_WIDTH, GAME_HEIGHT-100u);
-
-    ninja->ProcessWallCollision(walls);
-    ship->ProcessWallCollision(walls);
     
     bullets.ProcessWallCollisions(walls);
     // process all bullet collisions with ninja
     bullets.ProcessEntityCollisions(*ninja, 
         // lambda function for what happens to the ninja from a collision
-        [](BasicEntity& ninja) 
+        [](BasicEntity& ninja, const Vec2& bulletCenter) 
         {
-            // do nothing for now
+            ninja.TakeDamage();
+            // ninja stops for a bit
+            ninja.SetVelocity({});
         }
     );
+    bullets.RemoveDestroyed();
 
     kunai.ProcessWallCollisions(walls);
-    // process all bullet collisions with ninja
+    // process all wall collisions with ship
     kunai.ProcessEntityCollisions(*ship,
         // lambda function for what happens to the ship from a collision
-        [](BasicEntity& ship)
+        [](BasicEntity& ship, const Vec2& bulletCenter)
         {
-            // do nothing for now
+            ship.TakeDamage();
+            ship.SetVelocity(ship.GetVelocity() *= 0.9);
         }
     );
-
-    bullets.RemoveDestroyed();
     kunai.RemoveDestroyed();
+
+    ninja->ProcessWallCollision(walls);
+    ship->ProcessWallCollision(walls);
 }
 
 void Deninja::releaseAll()
 {
-    background->OnLostDevice();
-    ship->OnLostDevice();
-    ninja->OnLostDevice();
+    if (background != NULL) {
+        background->OnLostDevice();
+    }
+    if (ship != NULL) {
+        ship->OnLostDevice();
+    }
+    if (ninja != NULL) {
+        ninja->OnLostDevice();
+    }
     Game::releaseAll();
+    
     return;
 }
 
 void Deninja::resetAll()
 {
-    background->OnResetDevice();
-    ship->OnResetDevice();
-    ninja->OnResetDevice();
+    if (background != NULL) {
+        background->OnResetDevice();
+    }
+    if (ship != NULL) {
+        ship->OnResetDevice();
+    }
+    if (ninja != NULL) {
+        ninja->OnResetDevice();
+    }
     Game::resetAll();
+    
     return;
 }
 

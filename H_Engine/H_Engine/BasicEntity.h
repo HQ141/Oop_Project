@@ -14,6 +14,16 @@ public:
 	// bonds entity within the walls
 	// can be overridden to also rebound the entity
 	virtual bool ProcessWallCollision(const _Rect& walls);
+
+	// getters and setters
+	// get current position
+	Vec2 GetPosition() const;
+	// get current velocity
+	Vec2 GetVelocity() const;
+	// set position, can be overrided to have some additional effect
+	virtual void SetPosition(const Vec2& position);
+	// set velocity, can be overrided to have some additional effect
+	virtual void SetVelocity(const Vec2& velocity);
 	// get the center of the entity
 	Vec2 GetCenter() const;
 
@@ -33,6 +43,13 @@ public:
 	// every entity has some kind of lifespan (infinity still counts)
 	// said lifespan ends when sone condition is met, it can be hp, or a collision or anythin
 	
+	// for entities that can take damage in any way (times since spawn counts as well)
+	virtual void TakeDamage() {
+		// does nothing
+		// will maybe make this pure virtual later if I feel like seting some damage-over-time
+		// condition for all entities, not for now...
+		// or might just make an 'actor' or 'LivingBeing' class... I don't know, I'm too tired right now
+	}
 	// check if an entity has been destroyed
 	bool IsDestroyed();
 	// mark an entity as destroyed
@@ -57,15 +74,6 @@ protected:
 	// update position based on current velocity
 	virtual void Update(float deltatime);
 
-	// getters and setters
-	// get current position
-	Vec2 GetPosition() const;
-	// get current velocity
-	Vec2 GetVelocity() const;
-	// set position, can be overrided to have some additional effect
-	virtual void SetPosition(const Vec2& position);
-	// set velocity, can be overrided to have some additional effect
-	virtual void SetVelocity(const Vec2& velocity);
 	// width and height must be initialized using these,
 	// as it's not possible at runtime through the parameterized constructors
 	void SetWidth(float width);
@@ -75,7 +83,7 @@ protected:
 
 private:
 	// variable to track entity's current sttate
-	bool isDestoryed;
+	bool isDestoryed = false;
 	// position on screen
 	Vec2 position = {0.0f,0.0f};
 	// velocity

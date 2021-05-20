@@ -17,9 +17,15 @@ class Ninja : public Projectile
 	// 	   is just a BasicEntity that experiences projectile motion.
 	// 	   Which... makes Ninja a projectile...
 private:
-	enum class State {
+	enum class MovementState {
 		Running,
 		Jumping,
+		Idle,
+		Dead
+	};
+	enum class AttackState {
+		Throwing,
+		JumpThrowing, // not actually necessary, just adding for the sake of variable(?) indexing
 		Idle
 	};
 
@@ -27,7 +33,6 @@ public:
 	// constructors
 	Ninja(float initial_x, float initial_y, Graphics* graphics);
 	Ninja(const Vec2& initial_position, Graphics* graphics);
-	
 	
 	// update position of ninja based on current velocity given deltatime
 	void Update(float deltatime) override;
@@ -40,8 +45,10 @@ public:
 	// used for jumping instead of setting velocity directly
 	void Jump(float vertical_velocity);
 
-	bool CanFire() const;
-	Projectile* Fire(const Vec2& target);
+	// throwing Kunai
+
+	bool CanThrow() const;
+	Projectile* Throw(const Vec2& target);
 
 	// draw sprite
 	void Draw() override;
@@ -52,14 +59,26 @@ public:
 	Vec2 GetVelocity() const;
 	// set velocity
 	void SetVelocity(const Vec2& new_velocity) override;
-	// only change the x value of velocity
-	void SetVelocityX(float new_vx);
-	// only change the y value of velocity
-	void SetVelocityY(float new_vy);
 	// check if ninja is in mid-air
-	bool IsInAir() {
-		return state == State::Jumping;
+	bool IsJumping() const {
+		return mState == MovementState::Jumping;
 	}
+	// check if ninja is running
+	bool IsRunning() const {
+		return mState == MovementState::Running;
+	}
+	// check if ninja is idle (not moving or attacking)
+	bool IsIdle() const {
+		return mState == MovementState::Idle;
+	}
+	bool IsDead() const {
+		return mState == MovementState::Dead;
+	}
+	// check if sninja can change state
+	bool CanChangeState() const;
+
+	// override take damage
+	virtual void TakeDamage() override;
 
 	// gotta override these
 
@@ -75,18 +94,44 @@ private:
 	// handle the y part
 	// this one also uses the current velocity
 	void HandleVelocityY(float deltaV_y);
-
+	// changes state
+	// works for both attack and movement states
+	// also resets aState, because aState has overriding authority in drawing
+	// returns true if state change was successful (the new state wasn't a copy of the previous state)
+	template<typename s>
+	bool ChangeState(s& state_ref, s new_state);
+	void ChangeDirection(Animation::Direction new_direction);
 private:
-	State state = State::Idle;
-	Animation::Direction direction = Animation::Direction::Right;
-
+	// actual gameplay stuff
+	// number of hits ninja can take
+	int hp = 3;
+	// controls Kunai throwing, part of it anyway
 	FiringManager<Kunai> firingManager;
 
-	// all types of animations
+	// misc... i guess
+	MovementState mState = MovementState::Idle;
+	AttackState aState = AttackState::Idle;
+	Animation::Direction direction = Animation::Direction::Right;
+
+
+	// need to calculate how long a jump lasts and add a constexpr variable here to store that
+
+	// all things animation-related
 	float imageScale = 0.2f;
-	std::vector<Animation> animations;
+	std::vector<Animation> movementAnimations;
+	std::vector<Animation> attackAnimations;
 	// animation files
 	static const std::vector<LPCWSTR> run_files;
+	static const std::vector<LPCWSTR> jump_files;
 	static const std::vector<LPCWSTR> idle_files;
+	static const std::vector<LPCWSTR> throw_files;
+	static const std::vector<LPCWSTR> jump_throw_files;
+	static const std::vector<LPCWSTR> dead_files;
+
+	// ended up needing this because of how many animations ninja has
+	// and how frequently he alternates between them
+	static constexpr float StateHoldDuration = 0.2f;
+	static constexpr float AttackStateHoldDuration = 0.3f;
+	float stateHeldFor = 0.0f;
 };
 

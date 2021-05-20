@@ -1,22 +1,16 @@
 #include "Ship.h"
 
 const std::vector<LPCWSTR> Ship::files = {
-		L"flying-saucer-1.png",
-		L"flying-saucer-2.png",
-		L"flying-saucer-3.png",
-		L"flying-saucer-4.png",
-		L"flying-saucer-5.png"
+		L"png\\FlyingSaucer\\flying-saucer-1.png",
+		L"png\\FlyingSaucer\\flying-saucer-2.png",
+		L"png\\FlyingSaucer\\flying-saucer-3.png",
+		L"png\\FlyingSaucer\\flying-saucer-4.png",
+		L"png\\FlyingSaucer\\flying-saucer-5.png"
 };
 
-Ship::Ship(float initial_x, float initial_y, Graphics* graphics)
+Ship::Ship(const Vec2& initial_position, const Vec2& initial_velocity, Graphics* graphics)
 	:
-	Ship(Vec2(initial_x, initial_y), graphics)
-{
-}
-
-Ship::Ship(const Vec2& initial_position, Graphics* graphics)
-	:
-	BasicEntity(initial_position),
+	Projectile(initial_position, initial_velocity),
 	firingManager(graphics, 1.0f),
 	animation(graphics, files, 2.0f)
 {
@@ -27,9 +21,18 @@ Ship::Ship(const Vec2& initial_position, Graphics* graphics)
 void Ship::Update(float deltatime)
 {
 	// update position
-	BasicEntity::Update(deltatime);
-	// pass deltatime to animation
-	animation.Advance(deltatime);
+	if (!IsFalling()) {
+		// ship ignores gravity
+		BasicEntity::Update(deltatime);
+	}
+	else {
+		// until you kill it
+		Projectile::Update(deltatime);
+	}
+	if (!IsDestroyed()) {
+		// pass deltatime to animation
+		animation.Advance(deltatime);
+	}
 	// update time since last fire
 	firingManager.Update(deltatime);
 }
@@ -42,31 +45,25 @@ bool Ship::CanFire()
 Projectile* Ship::Fire()
 {
 	// does not check for 'can fire'
-	// so the 'can fire' attriibute may be ignored, up to the field to decide
+	// so the 'can fire' attriibute may be ignored, up to the field / main to decide
 	
 	// reset time
 	return firingManager.Fire(GetCenter(), Vec2());
 }
 
+bool Ship::ProcessWallCollision(const _Rect& walls)
+{
+	const _Rect rect = GetRect();
+	if (rect.bottom >= walls.bottom && !IsDestroyed()) {
+		SetVelocity({});
+		state = State::Destroyed;
+	}
+	return Projectile::ProcessWallCollision(walls);
+}
+
 void Ship::Draw()
 {
 	animation.Draw(GetPosition());
-}
-
-bool Ship::ProcessWallCollision(const _Rect& walls)
-{
-	_Rect rect = GetRect();
-	if (rect.right >= walls.right || rect.left <= walls.left) {
-		if (!isCollidingWithWall) {
-			Vec2 vel = GetVelocity();
-			SetVelocity({-vel.x, vel.y});
-			isCollidingWithWall = true;
-		}
-	}
-	else {
-		isCollidingWithWall = false;
-	}
-	return BasicEntity::ProcessWallCollision(walls);
 }
 
 void Ship::SetVelocity(const Vec2& new_velocity)
@@ -77,6 +74,14 @@ void Ship::SetVelocity(const Vec2& new_velocity)
 Vec2 Ship::GetPosition() const
 {
 	return BasicEntity::GetPosition();
+}
+
+void Ship::TakeDamage()
+{
+	hp--;
+	if (hp <= 0 && state == State::Normal) {
+		state = State::Falling;
+	}
 }
 
 void Ship::OnResetDevice()

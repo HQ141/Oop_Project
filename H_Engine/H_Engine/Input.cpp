@@ -34,7 +34,7 @@ void Input::initialize(HWND hwnd, bool capture)
     }
     catch(...)
     {
-        throw GameError(gameErrorNS::FATAL_ERROR, L"Error initializing input system");
+        throw ERROR_DESC(gameErrorNS::FATAL_ERROR, "Error initializing input system");
     }
 }void Input::keyDown(WPARAM wParam)
 {
